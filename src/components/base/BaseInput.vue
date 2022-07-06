@@ -1,5 +1,6 @@
 <template>
   <div class="control">
+    <label class="label" v-if="label">{{ label }}</label>
     <input
       type="text"
       class="input"
@@ -17,6 +18,7 @@ interface IBaseInputProps {
   placeholder: string;
   disabled?: boolean;
   modelValue: string;
+  label: string;
 }
 
 interface IBaseInputEmits {
@@ -43,23 +45,27 @@ const onChangeEvent = (value: string) => {
     -moz-appearance: none;
     appearance: none;
     border: 2px solid var(--border);
-    border-radius: 24px;
-    padding: 12px 16px;
+    border-radius: var(--bdrs-sm);
+    padding: 8px 16px;
     width: 100%;
+    height: 46px;
     transition: 0.8s;
     color: var(--text);
-    font-size: 18px;
+    font-size: var(--font-size-md);
 
     &::placeholder {
-      color: var(--text);
+      color: var(--neutral);
     }
 
     &:focus {
       border-color: var(--text);
     }
   }
-  & + & {
-    margin-top: 24px;
+  .label {
+    display: block;
+    font-size: var(--font-size-sm);
+    color: var(--neutral);
+    margin-bottom: var(--space-sm);
   }
 }
 </style>
