@@ -11,6 +11,8 @@
           v-model="form.login"
         />
         <base-input
+          password-visible-btn
+          type="password"
           :errors="v$.password.$errors"
           label="Пароль"
           placeholder="Пароль"
@@ -23,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import BaseInput from "@/components/base/BaseInput.vue";
+import BaseInput from "@/components/base/inputs/BaseInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseLoader from "@/components/base/BaseLoader.vue";
 import useVuelidate from "@vuelidate/core";
@@ -76,13 +78,13 @@ const router = useRouter();
 /**
  * Флаг загрузки
  */
-const loading = ref<boolean>(false);
+const loading = ref(false);
 
 /**
  * Метод отправки формы авторизации
  */
 const submitForm = async () => {
-  const isFormCorrect: boolean = await v$.value.$validate();
+  const isFormCorrect = await v$.value.$validate();
   if (isFormCorrect) {
     loading.value = true;
     const { success, token } = await api.auth(form);
