@@ -108,6 +108,7 @@ const buttonClass = computed(() => {
       color: var(--info-200);
     }
   }
+
   &--success {
     background: var(--success-800);
     color: var(--success-200);
@@ -117,6 +118,7 @@ const buttonClass = computed(() => {
       color: var(--success-400);
     }
   }
+
   &--warning {
     background: var(--warning-800);
     color: var(--warning-200);
@@ -126,14 +128,17 @@ const buttonClass = computed(() => {
       color: var(--warning-400);
     }
   }
+
   &--danger {
     background: var(--danger-800);
     color: var(--danger-200);
+
     &:hover {
       background: var(--danger-900);
       color: var(--danger-400);
     }
   }
+
   &--gradient {
     background: var(--gradient);
     color: var(--white);
