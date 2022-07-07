@@ -1,5 +1,6 @@
 <template>
   <div class="auth-form">
+    <base-loader v-if="loading" />
     <form @submit.prevent="submitForm" action="#">
       <h2 class="title">Вход в аккаунт</h2>
       <div class="grid">
@@ -23,17 +24,19 @@
 
 <script setup lang="ts">
 import BaseInput from "@/components/base/BaseInput.vue";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 import BaseButton from "@/components/base/BaseButton.vue";
 import { helpers, maxLength, minLength, required } from "@vuelidate/validators";
 import useVuelidate from "@vuelidate/core";
+import type IAuth from "@/types/IAuth";
+import api from "@/services/api";
+import BaseLoader from "@/components/base/BaseLoader.vue";
+import { useAuthStore } from "@/stores/auth";
 
-interface IAuthForm {
-  login: string;
-  password: string;
-}
+const loading = ref<boolean>(false);
 
-const form = reactive<IAuthForm>({
+const form = reactive<IAuth>({
   login: "",
   password: "",
 });
@@ -53,10 +56,20 @@ const validationRules = {
 
 const v$ = useVuelidate(validationRules, form);
 
+const authStore = useAuthStore();
+
+const router = useRouter();
+
 const submitForm = async () => {
   const isFormCorrect = await v$.value.$validate();
   if (isFormCorrect) {
-    alert("Форма будет отправлена!");
+    loading.value = true;
+    const { success, token } = await api.auth(form);
+    if (success && token) {
+      loading.value = false;
+      authStore.setToken(token);
+      await router.push({ name: "dashboard" });
+    }
   }
 };
 </script>
@@ -66,6 +79,8 @@ const submitForm = async () => {
   padding: var(--space-lg);
   background: var(--background-contrast);
   border-radius: var(--bdrs-md);
+  position: relative;
+  overflow: hidden;
 
   .grid {
     display: grid;
