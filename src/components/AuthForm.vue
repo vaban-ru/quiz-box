@@ -24,23 +24,27 @@
 
 <script setup lang="ts">
 import BaseInput from "@/components/base/BaseInput.vue";
-import { reactive, ref } from "vue";
-import { useRouter } from "vue-router";
 import BaseButton from "@/components/base/BaseButton.vue";
-import { helpers, maxLength, minLength, required } from "@vuelidate/validators";
+import BaseLoader from "@/components/base/BaseLoader.vue";
 import useVuelidate from "@vuelidate/core";
 import type IAuth from "@/types/IAuth";
 import api from "@/services/api";
-import BaseLoader from "@/components/base/BaseLoader.vue";
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+import { helpers, maxLength, minLength, required } from "@vuelidate/validators";
 import { useAuthStore } from "@/stores/auth";
 
-const loading = ref<boolean>(false);
-
+/**
+ * Данные формы авторизации
+ */
 const form = reactive<IAuth>({
   login: "",
   password: "",
 });
 
+/**
+ * Правила валидации формы авторизации
+ */
 const validationRules = {
   login: {
     required: helpers.withMessage("Обязательно для заполнения", required),
@@ -54,14 +58,31 @@ const validationRules = {
   },
 };
 
+/**
+ * Объект валидации
+ */
 const v$ = useVuelidate(validationRules, form);
 
+/**
+ * Стор для авторизации
+ */
 const authStore = useAuthStore();
 
+/**
+ * Инстанс роутреа
+ */
 const router = useRouter();
 
+/**
+ * Флаг загрузки
+ */
+const loading = ref<boolean>(false);
+
+/**
+ * Метод отправки формы авторизации
+ */
 const submitForm = async () => {
-  const isFormCorrect = await v$.value.$validate();
+  const isFormCorrect: boolean = await v$.value.$validate();
   if (isFormCorrect) {
     loading.value = true;
     const { success, token } = await api.auth(form);
