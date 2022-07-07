@@ -1,21 +1,21 @@
 <template>
   <div class="dashboard">
-    <h1>DASHOBARD</h1>
-    <base-button @click="logout" primary>Выход</base-button>
+    <base-container>
+      <div class="title">Ваши квизы</div>
+      <base-card> </base-card>
+    </base-container>
   </div>
 </template>
+
 <script setup lang="ts">
-import BaseButton from "@/components/base/BaseButton.vue";
-import { useAuthStore } from "@/stores/auth";
-import { useRouter } from "vue-router";
-
-const router = useRouter();
-
-const logout = async () => {
-  if (confirm("Вы действительно хотите выйти?")) {
-    const authStore = useAuthStore();
-    authStore.logout();
-    await router.push({ name: "auth" });
-  }
-};
+import BaseContainer from "@/components/base/BaseContainer.vue";
+import BaseCard from "@/components/base/BaseCard.vue";
 </script>
+
+<style lang="scss" scoped>
+.title {
+  font-size: var(--font-size-lg);
+  color: var(--text);
+  margin-bottom: var(--space-xl);
+}
+</style>

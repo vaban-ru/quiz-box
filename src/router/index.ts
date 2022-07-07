@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AuthPage from "../views/AuthPage.vue";
 import DashboardPage from "../views/DashboardPage.vue";
+import SettingsPage from "../views/SettingsPage.vue";
 import { useAuthStore } from "@/stores/auth";
 
 const router = createRouter({
@@ -18,6 +19,14 @@ const router = createRouter({
       path: "/",
       name: "dashboard",
       component: DashboardPage,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/settings",
+      name: "settings",
+      component: SettingsPage,
       meta: {
         requiresAuth: true,
       },

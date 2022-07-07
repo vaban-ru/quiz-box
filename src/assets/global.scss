@@ -73,7 +73,7 @@
   --danger-900: #7a0611;
 
   --background-contrast: #16181a;
-  --text: #ecedee;
+  --text: #dcdcdc;
   --border: #313538;
   --white: #ffffff;
   --black: #000000;
@@ -90,11 +90,14 @@
 
 body {
   background: linear-gradient(
-    35deg,
-    rgba(3, 0, 56, 1) 0%,
-    rgba(0, 0, 0, 1) 50%,
-    rgba(35, 0, 31, 1) 100%
-  );
+      35deg,
+      rgba(3, 0, 56, 1) 0%,
+      rgba(0, 0, 0, 1) 50%,
+      rgba(35, 0, 31, 1) 100%
+    )
+    center center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
   color: var(--text);
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -108,4 +111,8 @@ body {
   outline: none;
   text-rendering: geometricprecision;
   -webkit-tap-highlight-color: transparent;
+}
+
+@function HexToRGB($hex) {
+  @return red($hex), green($hex), blue($hex);
 }

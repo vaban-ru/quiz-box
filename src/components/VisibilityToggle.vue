@@ -28,7 +28,7 @@ const togglePasswordVisibility = () => {
 <style scoped lang="scss">
 .visibility-toggle {
   .icon {
-    fill: var(--text);
+    fill: var(--neutral);
   }
 }
 </style>

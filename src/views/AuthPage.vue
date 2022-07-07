@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="auth-page">
     <auth-form />
   </div>
 </template>
@@ -9,9 +9,8 @@ import AuthForm from "@/components/AuthForm.vue";
 </script>
 
 <style lang="scss">
-.page {
+.auth-page {
   height: 100vh;
-  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;

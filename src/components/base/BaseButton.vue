@@ -23,6 +23,7 @@ interface IBaseButtonProps {
   danger?: boolean;
   gradient?: boolean;
   block?: boolean;
+  sm?: boolean;
 }
 
 const props = withDefaults(defineProps<IBaseButtonProps>(), {
@@ -45,6 +46,7 @@ const buttonClass = computed(() => {
       "btn--danger": props.danger,
       "btn--gradient": props.gradient,
       "btn--block": props.block,
+      "btn--sm": props.sm,
     },
   ];
 });
@@ -142,6 +144,12 @@ const buttonClass = computed(() => {
   &--gradient {
     background: var(--gradient);
     color: var(--white);
+  }
+
+  &--sm {
+    padding: var(--space-xs) var(--space-sm);
+    min-height: 32px;
+    font-size: var(--font-size-sm);
   }
 }
 </style>

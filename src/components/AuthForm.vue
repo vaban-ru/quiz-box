@@ -1,9 +1,9 @@
 <template>
-  <div class="auth-form">
+  <base-card class="auth-form">
     <base-loader v-if="loading" />
     <form @submit.prevent="submitForm" action="#">
-      <h2 class="title">Вход в аккаунт</h2>
       <div class="grid">
+        <h2 class="title">Вход в аккаунт</h2>
         <base-input
           :errors="v$.login.$errors"
           label="Логин"
@@ -21,7 +21,7 @@
         <base-button type="submit" gradient block>Войти</base-button>
       </div>
     </form>
-  </div>
+  </base-card>
 </template>
 
 <script setup lang="ts">
@@ -35,6 +35,7 @@ import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { helpers, maxLength, minLength, required } from "@vuelidate/validators";
 import { useAuthStore } from "@/stores/auth";
+import BaseCard from "@/components/base/BaseCard.vue";
 
 /**
  * Данные формы авторизации
@@ -99,12 +100,6 @@ const submitForm = async () => {
 
 <style lang="scss">
 .auth-form {
-  padding: var(--space-lg);
-  background: var(--background-contrast);
-  border-radius: var(--bdrs-md);
-  position: relative;
-  overflow: hidden;
-
   .grid {
     display: grid;
     flex-direction: column;

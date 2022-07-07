@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import type { ErrorObject } from "@vuelidate/core";
-import VisibilityToggle from "@/components/base/VisibilityToggle.vue";
+import VisibilityToggle from "@/components/VisibilityToggle.vue";
 
 interface IBaseInputProps {
   placeholder: string;
@@ -90,7 +90,7 @@ const controlType = computed(() => {
     padding: var(--space-xs) var(--space-sm);
     width: 100%;
     height: 46px;
-    transition: 0.8s;
+    transition: 0.4s;
     color: var(--text);
     font-size: var(--font-size-md);
 
